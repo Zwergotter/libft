@@ -6,11 +6,19 @@
 #    By: edeveze <edeveze@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 17:44:21 by edeveze           #+#    #+#              #
-#    Updated: 2016/11/19 07:39:43 by edeveze          ###   ########.fr        #
+#    Updated: 2017/01/20 17:22:32 by edeveze          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# Executable
+
 NAME = libft.a
+
+# Includes
+
+INC = includes
+
+# Files
 
 SRC =		ft_atoi.c \
 			ft_bzero.c \
@@ -78,15 +86,22 @@ SRC =		ft_atoi.c \
 
 OBJ = $(SRC:.c=.o)
 
+# Compilation
+
 CC = gcc
 
 CFLAGS += -Wall -Wextra -Werror
+
+# Rules
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
+
+$(OBJ): %.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $^ -I$(INC)
 
 clean:
 	rm -f $(OBJ)
